@@ -1,0 +1,16 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <title>Cooking with artyom.js</title>
+    <!-- Important to load artyom in the head tag, this give time to load all the voices in the browser -->
+    <script src="artyom.window.min.js"></script>
+    <script>
+         // Create a global accesible instance of artyom
+         window.artyom = new Artyom();
+    </script>
+  </head>
+  <body>
+    <input type="button" onClick="startArtyom()" value="start voice commands" />
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
