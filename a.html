@@ -1,0 +1,27 @@
+<div>
+<input type="text" id="spkText">
+<input type="button" id="spkBtn" onclick="spack()" value="播放"> 
+</div>
+<div id="wrapSpk">
+<audic id="spkAudio" autoplay="autoplay">
+<source src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=6&text=" type="audio/mpeg"> 
+<embed height="0" width="0" src="">
+</audic>
+</div>
+<script>
+	function spack(){
+		var wrapSpk = document.getElementById("wrapSpk");
+		var spkAudio = document.getElementById("spkAudio");
+		var spkText = document.getElementById("spkText").value;
+		wrapSpk.removeChild(spkAudio);
+		var spkl = '<audio id="spkAudio" autoplay="autoplay">';
+		var spk2 = '<source src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=9&text='+spkText+'" type="audio/mpeg">';
+		var spk3 = '<embed height="0" width="0" src="">';
+		var spk4 = '</audio>';
+		wrapSpk.innerHTML = spkl + spk2 + spk3 + spk4;
+
+		spkAudio = document.getElementById("spkAudio"); 
+		spkAudio.play();
+	}
+
+</script>
