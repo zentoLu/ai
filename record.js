@@ -33,15 +33,7 @@ function startContinuousArtyom() {
   }, 250);
 }
 
-// Add a single command
-/*var commandHello = {
-    indexes:["hello","good morning","hey"], // These spoken words will trigger the execution of the command
-    action:function(){ // Action to be executed when a index match with spoken word
-        artyom.say("Hey buddy ! How are you today?");
-    }
-};*/
 
-// startContinuousArtyom();
 addCommand = function() {
   // Add a single command
   var commandStyle = {
