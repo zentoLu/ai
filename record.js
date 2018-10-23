@@ -1,4 +1,6 @@
 var artyom = new Artyom();
+var keywords = [];
+var wrongwords = [];
 // This function activates artyom and will listen and execute only 1 command (for http connections)
 function startOneCommandArtyom() {
   artyom.fatality(); // use this to stop any of
@@ -81,14 +83,71 @@ addCommand = function() {
     indexes: ["change style to *", "change color to *", "Rotate by * axis", "click *", "切换到*模式", "改成*色", "绕*旋转"],
     // Do something when the commands is triggered
     action: function(i, wildcard) {
-      var database = ["Carlos", "bruce", "David", "Joseph", "Kenny"];
-      console.log(i, wildcard)
-      //If the command "is xxx a good person" is triggered do, else
-      artyom.say(wildcard);
+      var keyword = keywordFnMap[i](wildcard);
+      if(keyword) {
+        keywords.push(keyword);
+      }else{
+        wrongwords.push(wildcard);
+      }
     }
   }];
 
   artyom.addCommands(myGroup);
+}
+
+var wordLibaray = {
+  style: ["sphere", "stick", "cartoon", "tube", "backbone", "surface"],
+  color: ["element", "residue", "second structure"],
+  rotate: ["x", "y", "z"],
+  wordSimilarStyle: [["sphere","Sofia","球形", /球/],["stick", "圆柱形"],["cartoon", /卡通/],["tube", "管形"],["backbone", "脊柱形"],["surface", "表面"]],
+  wordSimilarColor: [["element", "元素", "红"], ["residue", "残余"], ["second structure", "第二结构"]],
+  wordSimilarRotate: [["x"],["y"],["z"]]
+}
+
+function isValidWord(word, wordLib) {
+  for(var i=0,len=wordLib.length;i<len;i++) {
+    var words = wordLib[i];
+    if($.inArray(word, words) > -1) {
+      return words[0];
+    }
+  }
+  return false;
+}
+
+var keywordFnMap = {
+  0: function(word) {
+    return isValidWord(word, wordLibaray.wordSimilarStyle);
+  },
+  1: function(word) {
+    return isValidWord(word, wordLibaray.wordSimilarColor);
+  },
+  2: function(word) {
+    return isValidWord(word, wordLibaray.wordSimilarRotate);
+  },
+  3: function(word) {
+    return false;
+  },
+  4: function(word) {
+    return isValidWord(word, wordLibaray.wordSimilarStyle);
+  },
+  5: function(word) {
+    return isValidWord(word, wordLibaray.wordSimilarColor);
+  },
+  6: function(word) {
+    return isValidWord(word, wordLibaray.wordSimilarRotate);
+  }
+}
+
+
+
+function startRecording() {
+  artyom.obey();
+  keywords = [];
+}
+
+function stopRecording() {
+  artyom.dontObey();
+  console.log('识别到的命令', keywords, wrongwords);
 }
 
 
