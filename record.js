@@ -147,7 +147,7 @@ function startRecording() {
 
 function stopRecording() {
   artyom.dontObey();
-  console.log('识别到的命令', keywords, wrongwords);
+  console.log('识别到的命令', keywords,'/n错词' ,wrongwords);
 }
 
 
