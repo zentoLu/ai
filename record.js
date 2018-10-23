@@ -180,6 +180,7 @@ $(window).load(function() {
       debug: true,
       continuous: true,
       lang: "zh-CN",
+      // lang: "en-GB",
       listen: true
     });
     addCommand();
